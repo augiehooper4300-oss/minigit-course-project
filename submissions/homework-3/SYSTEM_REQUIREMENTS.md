@@ -89,3 +89,30 @@ Displaying APPROVED_UN_UR_BASELINE.md.
 - UR-GIT-08 → UN-GIT-07
 - UR-GIT-09 → UN-GIT-07
 
+## Functional System Requirements
+
+|SR-01| UR-GIT-01 | Given an uninitialized folder with notes.txt ONE, when `init` is used, MiniGit confirms initialization | Check: initialization output message, notes.txt still contains ONE, stage is empty. |
+
+|SR-02| UR-GIT-01, UR-GIT-08, UR-GIT-09 | Given an initialized project with notes.txt ONE staged and one checkpoint, if `init` is used again, MiniGit should say the project is already initialized and keep project unchanged. | Check: error output message, staged notes.txt still ONE, checkpoint still present. |
+
+|SR-03| UR-GIT-05 | Given an initialized project with notes.txt ONE and plan.txt, when `add notes.txt` is used, MiniGit should stage notes.txt ONE and not stage plan.txt. | Check: stage contains notes.txt ONE and not plan.txt. |
+
+|SR-04| UR-GIT-08, UR-GIT-09 | Given an initialized project with notes.txt ONE staged, one checkpoint, and no missing.txt, when `add missing.txt` is used, MiniGit should show an error that missing.txt doesn't exist and keep the project unchanged | Check: error shown, staged notes.txt still ONE, checkpoint still present. |
+
+|SR-05| UR-GIT-02 | Given an initialized project with notes.txt ONE staged and unedited, when `status` is used, MiniGit should have notes.txt as staged and change nothing.
+Check: output shows notes.txt as staged; stage and files unchanged. |
+
+|SR-06| UR-GIT-03 | Given notes.txt staged as ONE and then edited to TWO, when `diff` is used, MiniGit should show ONE as removed and TWO as added, and change nothing. | Check: output shows ONE removed and TWO added, stage still ONE, file still TWO. |
+
+|SR-07| UR-GIT-04 | Given a latest checkpoint with notes.txt ONE and a stage with notes.txt TWO, when `diff --staged` is used, MiniGit should show ONE as removed and TWO as added, and change nothing. | Check: output shows ONE removed and TWO added, stage still TWO, checkpoint still ONE. |
+
+|SR-08| UR-GIT-06 | Given notes.txt staged as ONE and then edited to TWO, when `commit -m "Add notes"` is used, MiniGit shall record a checkpoint with notes.txt ONE and the message "Add notes", and leave the working file as TWO. | Check: checkpoint has notes.txt ONE and "Add notes", working notes.txt still TWO. |
+
+|SR-09| UR-GIT-06, UR-GIT-08, UR-GIT-09 | Given one checkpoint and notes.txt TWO staged, when `commit -m ""` is used, MiniGit shall show an error that the message can't be empty, not create a checkpoint, and keep the stage unchanged. | Check: error shown, still one checkpoint; staged notes.txt still TWO. |
+
+|SR-10| UR-GIT-07 | Given two checkpoints, "First" then "Second", when `log` is used, MiniGit shall list "Second" before "First", each with its ID and message. | Check: output lists both, newest first, each with an ID and message. |
+
+|SR-11| UR-GIT-02 | Given notes.txt staged as ONE and then edited to TWO, and plan.txt never added, when `status` is used, MiniGit shall list notes.txt as changed after staging and plan.txt as untracked, and change nothing. | Check: output shows both statuses, staged notes.txt still ONE. |
+
+|SR-12| UR-GIT-08, UR-GIT-09 | Given notes.txt ONE staged and one checkpoint, when `add path/outside.txt` is used, MiniGit should show an error that the path is outside the project and keep the stage and checkpoint unchanged. | Check: error shown, staged notes.txt still ONE, checkpoint still present. |
+    
